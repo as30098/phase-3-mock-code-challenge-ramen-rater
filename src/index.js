@@ -11,9 +11,7 @@ fetch('http://localhost:3000/ramens')
     turnRamenIntoImg(ramen)
   ));
 
-
-
-// unstable element creation
+// turning url into img in div
 let turnRamenIntoImg = (ramen) => {
 
   // artisanal way of creating elements
@@ -25,8 +23,6 @@ let turnRamenIntoImg = (ramen) => {
   ramenMenu.append(ramenImg)
 
 }
-
-
 
 // click individual ramen - event listener
 ramenMenu.addEventListener('click', function(e) {
@@ -46,27 +42,22 @@ ramenMenu.addEventListener('click', function(e) {
   // let ramenRestaurant = document.querySelector('.restaurant')
   // //update
   // ramenRestaurant.innerText =
-
-
 })
-
-
-
-
 
 // update rating and comment - event listener
-.addEventListener('submit', function(){
-  ratingAndComment()
-})
+ramenRatingForm.addEventListener('submit', ratingAndComment)
 
-function ratingAndComment() {
+let ratingAndComment = (evt) => {
   // evt.preventDefault() is needed to avoid refresh
-  evt.preventDefault()
+   evt.preventDefault()
+  // still slightly shaky on how to target object id
   fetch(`http://localhost:3000/ramens/${ramen.id}`, {
     method: "PATCH",
     headers: {
       'Content-Type': 'application/json',
     },
+    // the data is the user input...needs to be transformed to fit database
+    // need to create the data variable still...
     body: JSON.stringify(data),
   })
   .then(res => res.json())
